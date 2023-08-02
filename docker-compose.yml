@@ -1,0 +1,29 @@
+version: '3'
+services:
+  auth_service:
+    image: auth_service
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql_db
+
+  user_service:
+    image: user_service
+    ports:
+      - "5002:5002"
+    depends_on:
+      - mysql_db
+
+  ui_service:
+    image: ui_service
+    ports:
+      - "5003:5003"
+    depends_on:
+      - auth_service
+      - user_service
+
+  mysql_db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: Nju8nju*
+      MYSQL_DATABASE: user_management

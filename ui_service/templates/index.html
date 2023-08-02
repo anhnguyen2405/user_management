@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Management Portal</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>User Management Portal</h1>
+    
+    <div id="login-form">
+        <h2>Login</h2>
+        <form id="login-form">
+            <label for="login-username">Username:</label>
+            <input type="text" id="login-username" name="login-username" required>
+
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password" name="login-password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <p id="login-error" class="error-message"></p>
+    </div>
+
+    <div id="register-form">
+        <h2>Register</h2>
+        <form id="register-form">
+            <label for="register-username">Username:</label>
+            <input type="text" id="register-username" name="register-username" required>
+
+            <label for="register-password">Password:</label>
+            <input type="password" id="register-password" name="register-password" required>
+
+            <button type="submit">Register</button>
+        </form>
+        <p id="register-success" class="success-message"></p>
+        <p id="register-error" class="error-message"></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
