@@ -1,11 +1,23 @@
+# user_management/docker-compose.yml
+
 version: '3'
 services:
+  mysql_db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 000000x@X
+      MYSQL_DATABASE: user_management
+    networks:
+      - bridge
+
   auth_service:
     image: auth_service
     ports:
       - "5000:5000"
     depends_on:
       - mysql_db
+    networks:
+      - bridge
 
   user_service:
     image: user_service
@@ -13,6 +25,8 @@ services:
       - "5002:5002"
     depends_on:
       - mysql_db
+    networks:
+      - bridge
 
   ui_service:
     image: ui_service
@@ -21,10 +35,8 @@ services:
     depends_on:
       - auth_service
       - user_service
+    networks:
+      - bridge
 
-  mysql_db:
-    image: mysql:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: 000000x@X
-      MYSQL_DATABASE: user_management
-
+networks:
+  bridge:
