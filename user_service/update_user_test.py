@@ -1,9 +1,9 @@
 import requests
 import concurrent.futures
 
-num_users = 3
+num_users = 20
 BASE_URL_AUTH = 'http://127.0.0.1:5000'
-BASE_URL_USER = 'http://127.0.0.1:5005'
+BASE_URL_USER = 'http://127.0.0.1:5002'
 
 def get_token(username, password):
     url = BASE_URL_AUTH + '/api/login'

@@ -1,3 +1,5 @@
+# user_management/user_service/user_service.py
+
 from flask import Flask, request, jsonify
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token
 from flask_mysqldb import MySQL
@@ -18,7 +20,8 @@ app.config['MYSQL_HOST']    = 'mysql_db'
 app.config['MYSQL_USER']    = 'root'
 app.config['MYSQL_PASSWORD']= '000000x@X'
 app.config['MYSQL_DB']      = 'user_management'
-# app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+app.config['MYSQL_UNIX_SOCKET'] = '/var/run/mysqld/mysqld.sock' 
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql = MySQL(app)
 
@@ -186,22 +189,24 @@ def delete_user(username):
 
     return jsonify({'message': 'User deleted successfully'}), 200
 
-if __name__ == '__main__':
-    with app.app_context():
-        cur = mysql.connection.cursor()
-        cur.execute("""
-                    CREATE TABLE IF NOT EXISTS users(
-                        id INT AUTO_INCREMENT PRIMARY KEY,
-                        username VARCHAR(255) NOT NULL UNIQUE,
-                        password VARCHAR(255) NOT NULL,
-                        first_name VARCHAR(255),
-                        last_name VARCHAR(255),
-                        email VARCHAR(255)
-                    )
-                    """)                
-        mysql.connection.commit()
-        cur.close()
+@app.before_first_request
+def create_tables():
+    cur = mysql.connection.cursor()
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS users(
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(255) NOT NULL UNIQUE,
+            password VARCHAR(255) NOT NULL,
+            first_name VARCHAR(255),
+            last_name VARCHAR(255),
+            email VARCHAR(255)
+        )
+    """)
+    mysql.connection.commit()
+    cur.close()
 
+
+if __name__ == '__main__':
     app.run(debug=True,port=5002,host='0.0.0.0')
 
 
