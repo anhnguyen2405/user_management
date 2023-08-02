@@ -25,5 +25,7 @@ services:
   mysql_db:
     image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: Nju8nju*
+      MYSQL_ROOT_PASSWORD: 000000x@X
       MYSQL_DATABASE: user_management
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+

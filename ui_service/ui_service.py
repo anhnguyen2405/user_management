@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # Replace the base URLs with the URLs where your Authentication and User services are running
 BASE_URL_AUTH = 'http://127.0.0.1:5000/api/'
-BASE_URL_USER = 'http://127.0.0.1:5002/api/'
+BASE_URL_USER = 'http://127.0.0.1:5001/api/'
 
 # Function to get the JWT token from the Authentication Service
 def get_token(username, password):
@@ -47,6 +47,6 @@ def register():
         return jsonify({'message': 'Authentication failed'}), 401
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5003)
+    app.run(debug=True, host='0.0.0.0')
 
 

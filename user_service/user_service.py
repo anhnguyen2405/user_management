@@ -14,8 +14,8 @@ app.config['SECRET_KEY'] = '9464990e38a96935477deca11607e07f51ec9f29535964f7412e
 jwt = JWTManager(app)
 
 # MySQL configurations (update with your MySQL credentials)
-app.config['MYSQL_HOST']    = 'localhost'
-app.config['MYSQL_USER']    = 'admin'
+app.config['MYSQL_HOST']    = 'mysql_db'
+app.config['MYSQL_USER']    = 'root'
 app.config['MYSQL_PASSWORD']= '000000x@X'
 app.config['MYSQL_DB']      = 'user_management'
 # app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
@@ -187,7 +187,6 @@ def delete_user(username):
     return jsonify({'message': 'User deleted successfully'}), 200
 
 if __name__ == '__main__':
-    print(global_salt)
     with app.app_context():
         cur = mysql.connection.cursor()
         cur.execute("""
@@ -203,7 +202,7 @@ if __name__ == '__main__':
         mysql.connection.commit()
         cur.close()
 
-    app.run(debug=True, port=5001)
+    app.run(debug=True, host='0.0.0.0')
 
 
 
