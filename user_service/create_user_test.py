@@ -1,7 +1,7 @@
 import requests
 import concurrent.futures
-num_users = 10
-base_url = 'http://127.0.0.1:5002'
+num_users = 20
+base_url = 'http://172.27.0.3:5002'
 
 def create_user(username, password, first_name, last_name, email):
     data = {
