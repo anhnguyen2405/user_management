@@ -15,10 +15,10 @@ app.config['JWT_SECRET_KEY'] = '9464990e38a96935477deca11607e07f51ec9f29535964f7
 jwt = JWTManager(app)
 
 # MySQL configurations (update with your MySQL credentials)
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'admin'
-app.config['MYSQL_PASSWORD'] = '000000x@X'
-app.config['MYSQL_DB'] = 'user_management'
+app.config['MYSQL_HOST']    = 'mysql_db'
+app.config['MYSQL_USER']    = 'root'
+app.config['MYSQL_PASSWORD']= '000000x@X'
+app.config['MYSQL_DB']      = 'user_management'
 
 mysql = MySQL(app)
 
@@ -76,6 +76,4 @@ def protected_resource():
     return jsonify({'message': 'Protected resource accessed successfully'}), 200
 
 if __name__ == '__main__':
-    print(global_salt)
-    app.run(debug=True)
-    # app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')
