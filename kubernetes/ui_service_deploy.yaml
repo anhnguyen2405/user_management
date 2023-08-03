@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: ui-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: ui-service
@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: ui-service
-          image: ui_service
+          image: ntnanhw1/ui_service:latest
           ports:
             - containerPort: 5003
